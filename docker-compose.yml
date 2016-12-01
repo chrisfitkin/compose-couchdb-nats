@@ -1,0 +1,20 @@
+  version: '2'
+  services:
+    web:
+      build: .
+      volumes:
+       - .:/code
+      depends_on:
+       - couchdb
+       - nats
+    couchdb:
+      image: couchdb
+      volumes:
+       - /var/couchdb:/usr/local/var/lib/couchdb
+      ports:
+       - "5984:5984"
+    nats:
+      image: nats
+      ports:
+       - "4222:4222"
+       - "8222:8222"
